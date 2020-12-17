@@ -35,7 +35,7 @@ export default function Home() {
 			setWarning(true)
 		}
 		else {
-			fetch(`${apiAddress}/${selectedPost._id}`,{
+			fetch(`${apiAddress}/`,{
 				method: 'put',
 				headers: {
 					'Accept': 'application/json',

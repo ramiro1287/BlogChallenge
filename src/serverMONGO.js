@@ -1,24 +1,15 @@
 require('dotenv').config()
 const path = require('path')
 const express = require('express')
-const mongoose = require('mongoose')
 const app = express()
 
 // MongoDB Config
-const {db_ip, db_name, db_port} = process.env
-const db_url = `mongodb://${db_ip}:${db_port}/${db_name}`
-const db_options = {
-	useUnifiedTopology: true,
-	useNewUrlParser: true
-}
-mongoose.connect(db_url, db_options)
-.then(()=> console.log('DB conectada...'))
-.catch(err=> console.error(err))
+require('./config/dbMongo')
 // Midlewares
 app.use(express.json())
-app.use(express.urlencoded({limit: '10mb', extended: true}))
+app.use(express.urlencoded({extended: true}))
 // Post Apis
-app.use('/posts', require('./routes/postApis/index'))
+app.use('/posts', require('./routes/postApis/indexMongo'))
 // Static Files
 app.use(express.static(path.join(__dirname, 'public')))
 // Start Server

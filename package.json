@@ -4,7 +4,8 @@
   "description": "Blog Challenge",
   "main": "./src/server.js",
   "scripts": {
-    "server": "nodemon ./src/server.js",
+    "server1": "nodemon ./src/serverMONGO.js",
+    "server2": "nodemon ./src/serverSQL.js",
     "webpack": "webpack --mode development --watch"
   },
   "author": "Ramiro Castañon",
@@ -12,7 +13,9 @@
   "dependencies": {
     "express": "^4.17.1",
     "mongoose": "^5.11.8",
-    "multer": "^2.0.0-rc.1"
+    "multer": "^2.0.0-rc.1",
+    "sequelize": "^6.3.5",
+    "sqlite3": "^5.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
