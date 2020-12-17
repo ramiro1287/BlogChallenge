@@ -1,5 +1,7 @@
 import React from 'react'
 import {HashRouter, Switch, Route} from 'react-router-dom'
+
+// Pages Import
 import NavBar from './NavBar'
 import Home from './pages/Home'
 import Create from './pages/Create'
@@ -28,7 +30,7 @@ const styles = {
 		display: 'flex',
 		flexDirection: 'column',
 		height: '100vh',
-		backgroundColor: '#DBDDF7aa'
+		backgroundColor: '#E8E9FFaa'
 	},
 	bodyContainer: {
 		display: 'flex',

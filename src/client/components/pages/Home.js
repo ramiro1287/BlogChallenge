@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {apiAddress} from '../../ipConfig'
+import moment from 'moment'
 
 export default function Home() {
 	const [posts, setPosts] = useState(null)
@@ -71,6 +72,8 @@ export default function Home() {
 		.then(res => res.json())
 		.then(data => {
 			alert(data.body.status)
+			setSelectedPost(null)
+			setToggleSwitch(0)
 			handleFetch()
 		})
 		.catch(err => console.error(err))
@@ -95,31 +98,47 @@ export default function Home() {
 				: <p style={{margin: '0 0 0 0', padding: '0 0 0 0', textAlign: 'center', fontSize: '6vh'}}>Loading...</p>
 				}
 			</div>
+		{/* ----------------------------------------------------------------------- */}
 			{toggleSwitch===1 && selectedPost ?
 				<div style={styles.frameContainer1}>
-					<p>ID: {selectedPost._id}</p>
-					<p>Category: {selectedPost.categoria}</p>
-					<p>Title: {selectedPost.titulo}</p>
-					<p>Content: {selectedPost.contenido}</p>
-					<button onClick={()=>{setSelectedPost(null); setToggleSwitch(0)}}>Close</button>
+					<div style={{display:'flex', flexDirection: 'column', margin: '1vh 1vw 1vh 1vw'}}>
+						<p style={styles.detailTitleStyle}>ID: {selectedPost._id}</p>
+						<p style={styles.detailTitleStyle}>Category: {selectedPost.categoria}</p>
+						<p style={styles.detailTitleStyle}>Title: {selectedPost.titulo}</p>
+						<p style={styles.detailTitleStyle}>Content: {selectedPost.contenido}</p>
+						<p style={styles.detailTitleStyle}>Date: {moment(selectedPost.fechaCreacion).format('DD/MM/YYYY')}</p>
+					</div>
+					<div style={{display:'flex', alignItems: 'center', justifyContent: 'center'}}>
+						<button onClick={()=>{setSelectedPost(null); setToggleSwitch(0)}} style={styles.btnStyle}>Close</button>
+					</div>
 				</div>
 			: toggleSwitch===2 && selectedPost ?
-				<div style={styles.frameContainer1}>
-					<p>Title</p>
-					<input
-						type='text'
-						value={selectedPost.titulo}
-						onChange={e => setSelectedPost({...selectedPost, titulo: e.target.value})}
-						style={{width: '40vw'}}
-					/>
-					<p>Content</p>
-					<textarea
-						type='text'
-						value={selectedPost.contenido}
-						onChange={e => setSelectedPost({...selectedPost, contenido: e.target.value})}
-						style={{width: '40vw', height: '30vh', resize: 'none'}}
-					/>
-					<p>Category</p>
+				<div style={styles.frameContainer2}>
+					<div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '1vh'}}>
+						<p style={styles.detailTitleStyle}>Title</p>
+					</div>
+					<div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+						<input
+							type='text'
+							value={selectedPost.titulo}
+							onChange={e => setSelectedPost({...selectedPost, titulo: e.target.value})}
+							style={{width: '80%', padding: '1vh 0.5vw 1vh 0.5vw', fontSize: '2.5vh'}}
+						/>
+					</div>
+					<div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '1vh'}}>
+						<p style={styles.detailTitleStyle}>Content</p>
+					</div>
+					<div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+						<textarea
+							type='text'
+							value={selectedPost.contenido}
+							onChange={e => setSelectedPost({...selectedPost, contenido: e.target.value})}
+							style={{width: '90%', height: '30vh', resize: 'none', padding: '1vh 0.5vw 1vh 0.5vw', fontSize: '2.6vh'}}
+						/>
+					</div>
+					<div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '1vh'}}>
+						<p style={styles.detailTitleStyle}>Category</p>
+					</div>
 					<div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
 						<button onClick={()=>setSelectedPost({...selectedPost, categoria: 'X'})} style={selectedPost.categoria==='X' ? styles.btnCategory1 : styles.btnCategory}>X</button>
 						<button onClick={()=>setSelectedPost({...selectedPost, categoria: 'Y'})} style={selectedPost.categoria==='Y' ? styles.btnCategory1 : styles.btnCategory}>Y</button>
@@ -132,8 +151,8 @@ export default function Home() {
 						</div>
 					:
 					<div style={{margin: '2vh 0 0 0'}}>
-						<button onClick={()=>handleEdit()}>Update</button>
-						<button onClick={()=>{setSelectedPost(null); setToggleSwitch(0)}}>Close</button>
+						<button onClick={()=>handleEdit()} style={styles.btnStyle}>Update</button>
+						<button onClick={()=>{setSelectedPost(null); setToggleSwitch(0)}} style={styles.btnStyle}>Close</button>
 					</div>
 					}
 				</div>
@@ -181,9 +200,30 @@ const styles = {
 		fontSize: '2vh'
 	},
 	frameContainer1: {
-		display: 'row',
+		display: 'flex',
+		flexDirection: 'column',
 		margin: '5vh 0 0 3vw',
-		width: '40vw'
+		width: '40vw',
+		height: '35vh',
+		backgroundColor: '#C1C1C1aa',
+		border: '0.7vh solid #262626',
+		borderRadius: '2vh',
+		overflowY: 'auto'
+	},
+	detailTitleStyle: {
+		margin: '0.5vh 0 0.5vh 0',
+		padding: '0 0 0 0',
+		fontSize: '2.8vh' 
+	},
+	frameContainer2: {
+		display: 'flex',
+		flexDirection: 'column',
+		margin: '5vh 0 0 3vw',
+		width: '40vw',
+		height: '70vh',
+		backgroundColor: '#C1C1C1aa',
+		border: '0.7vh solid #262626',
+		borderRadius: '2vh'
 	},
 	btnCategory: {
 		margin: '0 1vw 0 1vw',

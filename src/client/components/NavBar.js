@@ -11,7 +11,7 @@ function NavBar(props) {
 				title='Pagina Principal'
 				style={{display: 'flex', alignSelf: 'center', margin: '1vh 0 1vh 3vw', textDecoration: 'none', color: 'green'}}
 			>
-				<h1 style={{margin: '0 0 0 0', padding: '0 0 0 0', color: '#454DBC', fontSize: '8vh'}}>Blog</h1>
+				<h1 style={{margin: '0 0 0 0', padding: '0 0 0 0', color: 'white', fontSize: '8vh'}}>Blog</h1>
 			</Link>
 			<div style={{display: 'flex', alignItems: 'flex-end', margin: '0 3vw 1vh 0'}}>
 				<Link
@@ -31,7 +31,7 @@ const styles = {
 	navContainer: {
 		display: 'flex',
 		width: '100%',
-		backgroundColor: '#41B04C',
+		backgroundColor: '#2E2E2E',
 		justifyContent: 'space-between',
 		height: '12vh',
 		boxShadow: '0 4px 8px #7A7A7Aaa'
@@ -39,7 +39,7 @@ const styles = {
 	linkStyle: {
 		margin: '0 0 0 1vw',
 		textDecoration: 'none',
-		color: 'black',
+		color: 'white',
 		padding: '0.5vh 0.8vw 0.7vh 0.8vw',
 		borderRadius: '2vw',
 		fontSize: '3vh',
@@ -48,8 +48,8 @@ const styles = {
 	linkStyle1: {
 		margin: '0 0 0 1vw',
 		textDecoration: 'none',
-		backgroundColor: '#585858aa',
-		color: 'black',
+		backgroundColor: '#767676aa',
+		color: 'white',
 		padding: '0.5vh 0.8vw 0.7vh 0.8vw',
 		borderRadius: '2vw',
 		fontSize: '3vh',
@@ -60,7 +60,7 @@ const styles = {
 		textDecoration: 'none',
 		color: 'white',
 		borderBottom: '0.7vh solid white',
-		backgroundColor: '#585858aa',
+		backgroundColor: '#767676aa',
 		padding: '0.5vh 0.8vw 0.7vh 0.8vw',
 		borderRadius: '2vw',
 		fontSize: '3vh',

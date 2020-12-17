@@ -85,7 +85,7 @@ const styles = {
 	},
 	frame: {
 		display: 'flex',
-		margin: '4vh 0 2vh 0',
+		margin: '2vh 0 2vh 0',
 		flexDirection: 'column'
 	},
 	titleStyle: {
@@ -137,17 +137,19 @@ const styles = {
 		border: '0.4vh double red',
 		cursor: 'pointer',
 		color: 'red',
-		backgroundColor: 'black',
+		backgroundColor: '#1F1F1F',
+		fontSize: '2.5vh',
 		transition: '0.3s'
 	},
 	btnCategory1: {
 		margin: '0 1vw 0 1vw',
 		padding: '1vh 0.8vw 1vh 0.8vw',
 		borderRadius: '50%',
-		border: '0.4vh double green',
+		border: '0.4vh double #1BE136',
 		cursor: 'pointer',
-		color: 'green',
-		backgroundColor: 'black',
+		color: '#1BE136',
+		fontSize: '2.5vh',
+		backgroundColor: '#1F1F1F',
 		transition: '0.3s'
 	}
 }
