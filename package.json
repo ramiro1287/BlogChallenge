@@ -4,8 +4,7 @@
   "description": "Blog Challenge",
   "main": "./src/server.js",
   "scripts": {
-    "server1": "nodemon ./src/serverMONGO.js",
-    "server2": "nodemon ./src/serverSQL.js",
+    "server": "nodemon ./src/server.js",
     "webpack": "webpack --mode development --watch"
   },
   "author": "Ramiro Castañon",

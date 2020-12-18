@@ -2,14 +2,24 @@ require('dotenv').config()
 const path = require('path')
 const express = require('express')
 const app = express()
+const {db_selected} = process.env
 
-// MongoDB Config
-require('./config/dbMongo')
+// DB Config
+if (db_selected) {
+	const db = require('./config/dbSql')
+	db.authenticate()
+	.then(()=>console.log("SQLite's Database Conected..."))
+	.catch(err=>console.error(err))
+}
+else {
+	require('./config/dbMongo')
+}
+
 // Midlewares
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 // Post Apis
-app.use('/posts', require('./routes/postApis/indexMongo'))
+app.use('/posts', require('./routes/postApis/apis'))
 // Static Files
 app.use(express.static(path.join(__dirname, 'public')))
 // Start Server

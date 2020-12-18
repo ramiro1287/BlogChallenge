@@ -8,5 +8,5 @@ const db_options = {
 	useNewUrlParser: true
 }
 mongoose.connect(db_url, db_options)
-.then(()=> console.log('DB conectada...'))
+.then(()=> console.log("MongoDB's Database Conected..."))
 .catch(err=> console.error(err))

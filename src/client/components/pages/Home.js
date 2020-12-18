@@ -12,7 +12,14 @@ export default function Home() {
 	function handleFetch() {
 		fetch(apiAddress)
 		.then(res => res.json())
-		.then(data => setPosts(data))
+		.then(data => {
+			if (data.body.status==='Error') {
+				alert('Error')
+			}
+			else {
+				setPosts(data.body.posts)
+			}
+		})
 		.catch(err => console.error(err))
 	}
 
@@ -83,7 +90,7 @@ export default function Home() {
 		<div style={styles.container}>
 			<div style={styles.frameContainer}>
 				{posts ?
-					posts.map(p =>{
+					posts.map(p => {
 						return(
 						<div key={p._id} style={styles.frame}>
 							<p style={styles.titleStyle}>Title: {p.titulo}</p>
@@ -98,7 +105,6 @@ export default function Home() {
 				: <p style={{margin: '0 0 0 0', padding: '0 0 0 0', textAlign: 'center', fontSize: '6vh'}}>Loading...</p>
 				}
 			</div>
-		{/* ----------------------------------------------------------------------- */}
 			{toggleSwitch===1 && selectedPost ?
 				<div style={styles.frameContainer1}>
 					<div style={{display:'flex', flexDirection: 'column', margin: '1vh 1vw 1vh 1vw'}}>
