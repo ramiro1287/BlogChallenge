@@ -3,6 +3,7 @@ import {apiAddress} from '../../../ipConfig'
 
 export default function Edit(props) {
 	const [warning, setWarning] = useState(false)
+	const [btnState, setBtnState] = useState('')
 
 	function handleEdit() {
 		if (props.selectedPost.titulo==='' || props.selectedPost.contenido==='') {
@@ -80,14 +81,33 @@ export default function Edit(props) {
 				>Z</button>
 			</div>
 			{warning ?
-				<div style={{margin: '2vh 0 0 0'}}>
-					<p style={{color: 'red'}}>Invalid Inputs...</p>
-					<button onClick={()=>setWarning(false)}>Ok!</button>
+				<div style={styles.warningFrameStyle}>
+					<p style={styles.warningTextStyle}>Invalid Inputs...</p>
+					<img
+						onClick={()=>setWarning(false)}
+						title='Ok!'
+						src='/icons/Close-Icon.png'
+						style={styles.imgStyle}
+					/>
 				</div>
 			:
-			<div style={{margin: '2vh 0 0 0'}}>
-				<button onClick={()=>handleEdit()} style={styles.btnStyle}>Update</button>
-				<button onClick={()=>handleClose()} style={styles.btnStyle}>Close</button>
+			<div style={styles.btnContainer}>
+				<img
+					onMouseOver={()=>setBtnState('update')}
+					onMouseOut={()=>setBtnState('')}
+					onClick={()=>handleEdit()}
+					title='Update'
+					src='/icons/Update-Icon.png'
+					style={btnState==='update' ? styles.imgStyle1 : styles.imgStyle}
+				/>
+				<img
+					onMouseOver={()=>setBtnState('close')}
+					onMouseOut={()=>setBtnState('')}
+					onClick={()=>handleClose()}
+					title='Close'
+					src='/icons/Close-Icon.png'
+					style={btnState==='close' ? styles.imgStyle1 : styles.imgStyle}
+				/>
 			</div>
 			}
 		</div>
@@ -109,16 +129,6 @@ const styles = {
 		margin: '0.5vh 0 0.5vh 0',
 		padding: '0 0 0 0',
 		fontSize: '2.8vh'
-	},
-	btnStyle: {
-		margin: '0 0.3vw 0 0.3vw',
-		padding: '0.8vh 0.4vw 0.8vh 0.4vw',
-		border: '0.6vh double white',
-		borderRadius: '1.5vh',
-		backgroundColor: 'black',
-		color: 'white',
-		cursor: 'pointer',
-		fontSize: '2vh'
 	},
 	btnCategory: {
 		margin: '0 1vw 0 1vw',
@@ -155,5 +165,41 @@ const styles = {
 		fontSize: '2.6vh',
 		borderRadius: '1.5vh',
 		border: 'none'
+	},
+	imgStyle: {
+		height: '5vh',
+		margin: '0 0 0 0',
+		cursor: 'pointer',
+		transition: '0.3s'
+	},
+	imgStyle1: {
+		height: '6vh',
+		margin: '0 0 0 0',
+		cursor: 'pointer',
+		transition: '0.3s'
+	},
+	warningTextStyle: {
+		margin: '0 0 0 0',
+		padding: '0 0 0 2vw',
+		fontSize: '3.5vh',
+		color: 'black'
+	},
+	warningFrameStyle: {
+		display: 'flex',
+		margin: '1.5vh 2vw 0 2vh',
+		alignItems: 'center',
+		padding: '1vh 0 1vh 0',
+		justifyContent: 'space-between',
+		backgroundColor: '#FD4D4Daa',
+		border: '0.8vh double black',
+		borderRadius: '2vh'
+	},
+	btnContainer: {
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'space-between',
+		margin: '2vh 0 0 2vw',
+		height: '7vh',
+		width: '7vw'
 	}
 }

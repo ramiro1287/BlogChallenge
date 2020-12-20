@@ -1,7 +1,8 @@
-import React from 'react'
+import React, {useState} from 'react'
 import moment from 'moment'
 
 export default function Detail(props) {
+	const [btnState, setBtnState] = useState('')
 
 	return(
 		<div style={styles.container}>
@@ -27,8 +28,15 @@ export default function Detail(props) {
 					<p style={styles.titleStyle1}>{moment(props.selectedPost.fechaCreacion).format('DD/MM/YYYY')}</p>
 				</div>
 			</div>
-			<div style={{display:'flex', alignItems: 'center', justifyContent: 'center'}}>
-				<button onClick={()=>{props.setSelectedPost(null); props.setToggleSwitch(0)}} style={styles.btnStyle}>Close</button>
+			<div style={{display:'flex', alignItems: 'center', justifyContent: 'flex-end'}}>
+				<img
+					onMouseOver={()=>setBtnState('close')}
+					onMouseOut={()=>setBtnState('')}
+					title='Close'
+					src='/icons/Close-Icon.png'
+					onClick={()=>{props.setSelectedPost(null); props.setToggleSwitch(0)}}
+					style={btnState==='close' ? styles.imgStyle1 : styles.imgStyle}
+				/>
 			</div>
 		</div>
 	)
@@ -57,14 +65,16 @@ const styles = {
 		padding: '0 0 0 0',
 		fontSize: '2.65vh'
 	},
-	btnStyle: {
-		margin: '0 0.3vw 0 0.3vw',
-		padding: '0.8vh 0.4vw 0.8vh 0.4vw',
-		border: '0.6vh double white',
-		borderRadius: '1.5vh',
-		backgroundColor: 'black',
-		color: 'white',
+	imgStyle: {
+		height: '5vh',
+		margin: '0 2vw 0 0.4vw',
 		cursor: 'pointer',
-		fontSize: '2vh'
+		transition: '0.3s'
 	},
+	imgStyle1: {
+		height: '6vh',
+		margin: '0 2vw 0 0.4vw',
+		cursor: 'pointer',
+		transition: '0.3s'
+	}
 }

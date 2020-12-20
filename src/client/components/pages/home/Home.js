@@ -7,6 +7,7 @@ export default function Home() {
 	const [posts, setPosts] = useState(null)
 	const [selectedPost, setSelectedPost] = useState(null)
 	const [toggleSwitch, setToggleSwitch] = useState(0)
+	const [btnState, setBtnState] = useState('')
 	useEffect(()=>{handleFetch()},[])
 
 	function handleFetch() {
@@ -67,10 +68,31 @@ export default function Home() {
 								<p style={styles.titleStyle}>Title:</p>
 								<p style={styles.titleStyle1}>{p.titulo}</p>
 							</div>
-							<div style={{display: 'flex', alignItems: 'center'}}>
-								<button onClick={()=>handleDetail(p._id)} style={styles.btnStyle}>Detail</button>
-								<button onClick={()=>{setSelectedPost(p); setToggleSwitch(2)}} style={styles.btnStyle}>Edit</button>
-								<button onClick={()=>handleDelete(p._id)} style={styles.btnStyle}>Delete</button>
+							<div style={styles.btnContainer}>
+								<img
+									onMouseOver={()=>setBtnState('details')}
+									onMouseOut={()=>setBtnState('')}
+									onClick={()=>handleDetail(p._id)}
+									title='Details'
+									src='/icons/Detail-Icon.png'
+									style={btnState==='details' ? styles.imgStyle1 : styles.imgStyle}
+								/>
+								<img
+									onMouseOver={()=>setBtnState('edit')}
+									onMouseOut={()=>setBtnState('')}
+									onClick={()=>{setSelectedPost(p); setToggleSwitch(2)}}
+									title='Edit'
+									src='/icons/Edit-Icon.png'
+									style={btnState==='edit' ? styles.imgStyle1 : styles.imgStyle}
+								/>
+								<img
+									onMouseOver={()=>setBtnState('delete')}
+									onMouseOut={()=>setBtnState('')}
+									onClick={()=>handleDelete(p._id)}
+									title='Delete'
+									src='/icons/Delete-Icon.png'
+									style={btnState==='delete' ? styles.imgStyle1 : styles.imgStyle}
+								/>
 							</div>
 						</div>
 						)
@@ -130,14 +152,23 @@ const styles = {
 		padding: '1vh 0 2vh 0',
 		fontSize: '2.6vh'
 	},
-	btnStyle: {
-		margin: '0 0.3vw 0 0.3vw',
-		padding: '0.55vh 0.4vw 0.65vh 0.4vw',
-		border: '0.6vh double white',
-		borderRadius: '1.5vh',
-		backgroundColor: 'black',
-		color: 'white',
+	imgStyle: {
+		height: '4.5vh',
+		margin: '0 0 0 0',
 		cursor: 'pointer',
-		fontSize: '2.1vh'
+		transition: '0.2s'
+	},
+	imgStyle1: {
+		height: '5.5vh',
+		margin: '0 0 0 0',
+		cursor: 'pointer',
+		transition: '0.2s'
+	},
+	btnContainer: {
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'space-between',
+		margin: '0 0.5vh 0 0',
+		width: '8vw'
 	}
 }

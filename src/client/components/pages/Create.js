@@ -5,10 +5,11 @@ export default function Create(props) {
 	const [title, setTitle] = useState('')
 	const [content, setContent] = useState('')
 	const [category, setCategory] = useState('')
-	const [warning, setWarning] = useState(null)
+	const [warning, setWarning] = useState(false)
+	const [btnState, setBtnState] = useState('')
 
 	function inputsValidate() {
-		if (title==='' || content==='' || category==='') {setWarning('Invalid inputs...')}
+		if (title==='' || content==='' || category==='') {setWarning(true)}
 		else {
 			fetch(`${apiAddress}`,{
 				method: 'post',
@@ -66,10 +67,27 @@ export default function Create(props) {
 					</div>
 				</div>
 				<div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-					{warning ? warning : null}
 					{!warning ?
-					<button onClick={()=>inputsValidate()} style={styles.btnStyle}>Create Post</button>
-					: <button onClick={()=>setWarning(null)} style={styles.btnStyle1}>Ok!</button>
+					<img
+						onMouseOut={()=>setBtnState('')}
+						onMouseOver={()=>setBtnState('add')}
+						onClick={()=>inputsValidate(false)}
+						title='Create'
+						src='/icons/Add-Icon.png'
+						style={btnState==='add' ? styles.imgStyle1 : styles.imgStyle}
+					/>
+					:
+					<div style={styles.warningFrameStyle}>
+						<p style={styles.warningTextStyle}>Invalid Inputs...</p>
+						<img
+							onMouseOut={()=>setBtnState('')}
+							onMouseOver={()=>setBtnState('close')}
+							onClick={()=>setWarning(false)}
+							title='Ok!'
+							src='/icons/Close-Icon.png'
+							style={btnState==='close' ? styles.imgStyle1 : styles.imgStyle}
+						/>
+					</div>
 					}
 				</div>
 			</div>
@@ -121,15 +139,6 @@ const styles = {
 		color: 'white',
 		backgroundColor: 'black'
 	},
-	btnStyle1: {
-		margin: '0 0 0 0',
-		padding: '0.6vh 0.4vw 0.6vh 0.4vw',
-		border: '0.5vh double white',
-		borderRadius: '1.5vh',
-		cursor: 'pointer',
-		color: 'white',
-		backgroundColor: '#FF5F5F'
-	},
 	btnCategory: {
 		margin: '0 1vw 0 1vw',
 		padding: '1vh 0.8vw 1vh 0.8vw',
@@ -151,5 +160,34 @@ const styles = {
 		fontSize: '2.5vh',
 		backgroundColor: '#1F1F1F',
 		transition: '0.3s'
+	},
+	imgStyle: {
+		height: '5vh',
+		margin: '0 1vw 0 0',
+		cursor: 'pointer',
+		transition: '0.3s'
+	},
+	imgStyle1: {
+		height: '6vh',
+		margin: '0 1vw 0 0',
+		cursor: 'pointer',
+		transition: '0.3s'
+	},
+	warningTextStyle: {
+		margin: '0 0 0 0',
+		padding: '0 0 0 1vw',
+		fontSize: '3.5vh',
+		color: 'black'
+	},
+	warningFrameStyle: {
+		display: 'flex',
+		margin: '1.5vh 0 0 0',
+		alignItems: 'center',
+		width: '25vw',
+		height: '8vh',
+		justifyContent: 'space-between',
+		backgroundColor: '#FD4D4Daa',
+		border: '0.8vh double black',
+		borderRadius: '2vh'
 	}
 }
