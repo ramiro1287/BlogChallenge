@@ -2,7 +2,7 @@ import React from 'react'
 import {HashRouter, Switch, Route} from 'react-router-dom'
 
 import NavBar from './NavBar'
-import Home from './pages/Home'
+import Home from './pages/home/Home'
 import Create from './pages/Create'
 import NotFound from './pages/NotFound'
 

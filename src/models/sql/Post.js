@@ -1,12 +1,13 @@
 const Sequelize = require('sequelize')
 const db = require('../../config/dbSql')
-const crypto = require('crypto')
 
 const Post = db.define('post', {
 		_id: {
 			type: Sequelize.STRING,
 			primeryKey: true,
-			defaultValue: createID()
+			validate: {
+				notEmpty: true
+			}
 		},
 		titulo: {
 			type: Sequelize.STRING,
@@ -37,8 +38,3 @@ const Post = db.define('post', {
 	})
 Post.sync({force: false})
 module.exports = Post
-
-function createID() {
-	const id = crypto.randomBytes(Math.ceil((16*3)/4)).toString('base64').slice(0,16).replace(/\+/g,'0').replace(/\//g,'0')
-	return id
-}

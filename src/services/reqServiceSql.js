@@ -1,4 +1,13 @@
 const Post = require('../models/sql/Post')
+const crypto = require('crypto')
+
+function createID() {
+	const id = crypto.randomBytes(Math.ceil((32*3)/4))
+		.toString('base64').slice(0,32)
+		.replace(/\+/g,'0')
+		.replace(/\//g,'0')
+	return id
+}
 
 const requestService = {
 	findAll: async () => {
@@ -17,7 +26,8 @@ const requestService = {
 	},
 	save: async (data) => {
 		const {titulo, contenido, categoria} = data
-		await Post.create({titulo, contenido, categoria})
+		const _id = createID()
+		await Post.create({_id, titulo, contenido, categoria})
 	},
 	update: async (data) => {
 		const {_id, titulo, contenido, categoria} = data
