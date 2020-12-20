@@ -70,28 +70,28 @@ export default function Home() {
 							</div>
 							<div style={styles.btnContainer}>
 								<img
-									onMouseOver={()=>setBtnState('details')}
+									onMouseOver={()=>setBtnState(`details:${p._id}`)}
 									onMouseOut={()=>setBtnState('')}
 									onClick={()=>handleDetail(p._id)}
 									title='Details'
 									src='/icons/Detail-Icon.png'
-									style={btnState==='details' ? styles.imgStyle1 : styles.imgStyle}
+									style={btnState===`details:${p._id}` ? styles.imgStyle1 : styles.imgStyle}
 								/>
 								<img
-									onMouseOver={()=>setBtnState('edit')}
+									onMouseOver={()=>setBtnState(`edit:${p._id}`)}
 									onMouseOut={()=>setBtnState('')}
 									onClick={()=>{setSelectedPost(p); setToggleSwitch(2)}}
 									title='Edit'
 									src='/icons/Edit-Icon.png'
-									style={btnState==='edit' ? styles.imgStyle1 : styles.imgStyle}
+									style={btnState===`edit:${p._id}` ? styles.imgStyle1 : styles.imgStyle}
 								/>
 								<img
-									onMouseOver={()=>setBtnState('delete')}
+									onMouseOver={()=>setBtnState(`delete:${p._id}`)}
 									onMouseOut={()=>setBtnState('')}
 									onClick={()=>handleDelete(p._id)}
 									title='Delete'
 									src='/icons/Delete-Icon.png'
-									style={btnState==='delete' ? styles.imgStyle1 : styles.imgStyle}
+									style={btnState===`delete:${p._id}` ? styles.imgStyle1 : styles.imgStyle}
 								/>
 							</div>
 						</div>
