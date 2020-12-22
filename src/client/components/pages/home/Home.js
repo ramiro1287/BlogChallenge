@@ -14,7 +14,7 @@ export default function Home() {
 		fetch(apiAddress)
 		.then(res => res.json())
 		.then(data => {
-			if (data.body.status==='Error') {
+			if (data.status==='Error') {
 				alert('Error')
 			}
 			else {
@@ -64,7 +64,7 @@ export default function Home() {
 					posts.map(p => {
 						return(
 						<div key={p._id} style={styles.frame}>
-							<div style={{display: 'flex', alignItems: 'center'}}>
+							<div style={{display: 'flex', alignItems: 'center', width: '78%'}}>
 								<p style={styles.titleStyle}>Title:</p>
 								<p style={styles.titleStyle1}>{p.titulo}</p>
 							</div>

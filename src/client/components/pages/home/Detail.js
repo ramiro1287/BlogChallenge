@@ -15,11 +15,11 @@ export default function Detail(props) {
 					<p style={styles.titleStyle}>Category:</p>
 					<p style={styles.titleStyle1}>{props.selectedPost.categoria}</p>
 				</div>
-				<div style={{display: 'flex', alignItems: 'center'}}>
+				<div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
 					<p style={styles.titleStyle}>Title:</p>
 					<p style={styles.titleStyle1}>{props.selectedPost.titulo}</p>
 				</div>
-				<div style={{display: 'flex', alignItems: 'center'}}>
+				<div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
 					<p style={styles.titleStyle}>Content:</p>
 					<p style={styles.titleStyle1}>{props.selectedPost.contenido}</p>
 				</div>

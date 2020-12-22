@@ -5,11 +5,18 @@ export default function Create(props) {
 	const [title, setTitle] = useState('')
 	const [content, setContent] = useState('')
 	const [category, setCategory] = useState('')
-	const [warning, setWarning] = useState(false)
+	const [warning, setWarning] = useState([])
 	const [btnState, setBtnState] = useState('')
 
 	function inputsValidate() {
-		if (title==='' || content==='' || category==='') {setWarning(true)}
+		const errors = []
+		if(title==='') {errors.push('title')}
+		if(content==='') {errors.push('content')}
+		if(category==='') {errors.push('category')}
+
+		if (errors.length) {
+			setWarning(errors)
+		}
 		else {
 			fetch(`${apiAddress}`,{
 				method: 'post',
@@ -42,53 +49,48 @@ export default function Create(props) {
 					<p style={styles.titleStyle}>Title</p>
 					<input
 						value={title}
-						onChange={e => setTitle(e.target.value)}
+						onChange={e => {setTitle(e.target.value); setWarning([])}}
 						placeholder='Insert title'
 						type='text'
-						style={styles.inputStyle}
+						style={warning.some(state => state==='title') ? styles.inputStyle1 : styles.inputStyle}
 					/>
 				</div>
 				<div style={styles.frame}>
 					<p style={styles.titleStyle}>Content</p>
 					<textarea
 						value={content}
-						onChange={e => setContent(e.target.value)}
+						onChange={e => {setContent(e.target.value); setWarning([])}}
 						placeholder='Write a body'
 						type='text'
-						style={styles.inputAreaStyle}
+						style={warning.some(state => state==='content') ? styles.inputAreaStyle1 : styles.inputAreaStyle}
 					/>
 				</div>
 				<div style={styles.frame}>
 					<p style={styles.titleStyle}>Category</p>
-					<div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-						<button onClick={()=>setCategory('X')} style={category==='X' ? styles.btnCategory1 : styles.btnCategory}>X</button>
-						<button onClick={()=>setCategory('Y')} style={category==='Y' ? styles.btnCategory1 : styles.btnCategory}>Y</button>
-						<button onClick={()=>setCategory('Z')} style={category==='Z' ? styles.btnCategory1 : styles.btnCategory}>Z</button>
+					<div style={warning.some(state => state==='category') ? styles.categoryFrame1 : styles.categoryFrame}>
+						<button
+							onClick={()=>{setCategory('X'); setWarning([])}}
+							style={category==='X' ? styles.btnCategory1 : styles.btnCategory}
+						>X</button>
+						<button
+							onClick={()=>{setCategory('Y'); setWarning([])}}
+							style={category==='Y' ? styles.btnCategory1 : styles.btnCategory}
+						>Y</button>
+						<button
+							onClick={()=>{setCategory('Z'); setWarning([])}}
+							style={category==='Z' ? styles.btnCategory1 : styles.btnCategory}
+						>Z</button>
 					</div>
 				</div>
 				<div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-					{!warning ?
 					<img
 						onMouseOut={()=>setBtnState('')}
 						onMouseOver={()=>setBtnState('add')}
-						onClick={()=>inputsValidate(false)}
+						onClick={()=>inputsValidate()}
 						title='Create'
 						src='/icons/Add-Icon.png'
 						style={btnState==='add' ? styles.imgStyle1 : styles.imgStyle}
 					/>
-					:
-					<div style={styles.warningFrameStyle}>
-						<p style={styles.warningTextStyle}>Invalid Inputs...</p>
-						<img
-							onMouseOut={()=>setBtnState('')}
-							onMouseOver={()=>setBtnState('close')}
-							onClick={()=>setWarning(false)}
-							title='Ok!'
-							src='/icons/Close-Icon.png'
-							style={btnState==='close' ? styles.imgStyle1 : styles.imgStyle}
-						/>
-					</div>
-					}
 				</div>
 			</div>
 		</div>
@@ -120,6 +122,15 @@ const styles = {
 		width: '35vw',
 		fontSize: '2.7vh'
 	},
+	inputStyle1: {
+		margin: '0 0 0 0',
+		padding: '0.8vh 0.5vw 0.8vh 0.5vw',
+		borderRadius: '1.5vh',
+		border: '0.3vh solid black',
+		width: '35vw',
+		fontSize: '2.7vh',
+		backgroundColor: '#FF7575aa'
+	},
 	inputAreaStyle: {
 		margin: '0 0 0 0',
 		padding: '0.8vh 0.5vw 0.8vh 0.5vw',
@@ -129,6 +140,17 @@ const styles = {
 		resize: 'none',
 		height: '30vh',
 		fontSize: '2.7vh'
+	},
+	inputAreaStyle1: {
+		margin: '0 0 0 0',
+		padding: '0.8vh 0.5vw 0.8vh 0.5vw',
+		borderRadius: '1.5vh',
+		border: '0.3vh solid black',
+		width: '35vw',
+		resize: 'none',
+		height: '30vh',
+		fontSize: '2.7vh',
+		backgroundColor: '#FF7575aa'
 	},
 	btnStyle: {
 		margin: '0 0 0 0',
@@ -189,5 +211,24 @@ const styles = {
 		backgroundColor: '#FD4D4Daa',
 		border: '0.8vh double black',
 		borderRadius: '2vh'
+	},
+	categoryFrame: {
+		display: 'flex',
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'center',
+		margin: '0 10vw 0 10vw',
+		padding: '1vh 0 1vh 0',
+		borderRadius: '3vh'
+	},
+	categoryFrame1: {
+		display: 'flex',
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'center',
+		margin: '0 10vw 0 10vw',
+		padding: '1vh 0 1vh 0',
+		borderRadius: '3vh',
+		backgroundColor: '#FF7575aa'
 	}
 }
